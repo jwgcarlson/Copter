@@ -1,0 +1,11 @@
+- change P_22 integrals in SPT to use a logarithmic substitution, so that
+  interesting regions aren't missed when using a high QMAX
+- improve inline documentation
+- make Python bindings use regular Python lists if numpy is unavailable
+- use distutils for compiling Python bindings
+- change FlowingWithTime to TimeRG
+- cite relevant papers in source code
+- add license notices to source files
+- use -R linker option (possibly using $ORIGIN) instead of relying on
+  LD_LIBRARY_PATH
+- update documentation to reflect FFTW3 dependency, and make this optional

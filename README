@@ -1,0 +1,58 @@
+Welcome to Copter!
+
+Introduction
+------------
+Copter is a software package for doing calculations in cosmological
+perturbation theory.  Specifically, Copter includes code for computing
+statistical observables in the large-scale structure of matter using various
+forms of perturbation theory, including linear theory, standard perturbation
+theory, renormalized perturbation theory, and many others.  For a fuller
+description of the various theories, see arXiv:0905.0479 and references
+therein.
+
+
+Requirements
+------------
+Copter is written in C++, so you'll need a relatively modern C++ compiler (e.g.
+g++).  Copter makes use of the GNU Scientific Library (GSL), which you will
+need to have installed somewhere on your system.  It also makes use of parts of
+the Boost C++ library, but the relevant header files are included with Copter
+(in the src/boost directory), so you do not need to install it yourself.
+
+To build the optional Python bindings, you'll need
+  1) a recent version of SWIG (usually located at /usr/bin/swig).
+  2) Python development headers (usually found in /usr/include/pythonM.N),
+  3) Numpy development headers (usually found in /usr/include/numpy)
+The configure script (described below) should find the relevant files
+automagically.
+
+
+Building and Installing
+-----------------------
+Copter should compile on any standard Unix-like machine (including Linux and
+OS X).  It makes use of GNU Autotools, which is the standard build system for
+most open source software today.  For you, the user, installation is as simple
+as entering the three commands
+  $ ./configure [OPTION]... [VAR=VALUE]...
+  $ make
+  $ make install
+
+The installation directory is determined by the options you pass to the
+'configure' script.  The most important options are:
+  --prefix=PREFIX   top-level installation directory (defaults to /usr/local,
+                      so you probably want to specify this option)
+  --enable-openmp   use OpenMP to parallelize expensive loops (default yes)
+  --enable-python   build Python bindings (default no)
+By default 'make' will use the standard system compiler.  To use a different
+compiler, append 'CXX=<preferred C++ compiler>' to your configure command.
+Try `./configure --help' to see a full list of options.
+
+Running 'make install' will install the library 'libcopter.so' to 'PREFIX/lib',
+the corresponding C++ header files to 'PREFIX/include/Copter', and some
+standard data files to 'PREFIX/share/Copter'.  If Python bindings are enabled,
+they will be installed to 'PREFIX/lib/pythonM.N/site-packages'.
+
+For example, to install Copter to your home directory (~/lib, ~/include, etc.)
+using the Intel compiler, you would run
+  $ ./configure --prefix=$HOME --enable-openmp CXX=icpc
+  $ make && make install
