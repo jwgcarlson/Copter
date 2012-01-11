@@ -145,3 +145,10 @@ void ComputeXiLM(int l, int m, int N, const double k[], const double pk[], doubl
 void pk2xi(int N, const double k[], const double pk[], double r[], double xi[]) {
     ComputeXiLM(0, 2, N, k, pk, r, xi);
 }
+
+void xi2pk(int N, const double r[], const double xi[], double k[], double pk[]) {
+    static const double TwoPiCubed = 8*M_PI*M_PI*M_PI;
+    ComputeXiLM(0, 2, N, r, xi, k, pk);
+    for(int j = 0; j < N; j++)
+        pk[j] *= TwoPiCubed;
+}

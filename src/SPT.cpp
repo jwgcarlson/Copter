@@ -67,20 +67,23 @@ real SPT::P13(real k, int a, int b) const {
     }
 }
 
-static real f22_dd(const PowerSpectrum& P_L, real k, real q, real x) {
-    real r = q/k;
-    real d = 1 + r*r - 2*r*x;
-    if(d < 1e-5)
+static real f22_dd(const PowerSpectrum& P_L, real k, real logq, real x) {
+    double q = exp(logq), r = q/k, r2 = r*r, rx = r*x, x2 = x*x, d = 1 + r2 - 2*rx;
+    if(d < 1e-10)
         return 0;
     else
-        return P_L(q) * P_L(k*sqrt(d)) * pow2(3*r + 7*x - 10*r*x*x) / pow2(d);
+        return q * P_L(q) * P_L(k*sqrt(d)) * pow2(3*r + 7*x - 10*r*x2) / pow2(d);
 }
 
 /* P_{\delta\delta}^{(22)} */
 real SPT::P22_dd(real k) const {
-    real a[2] = { QMIN, -1 };
-    real b[2] = { QMAX, XMAX };
-    return k*k/(98*4*M_PI*M_PI) * Integrate<2>(bind(f22_dd, cref(P_L), k, _1, _2), a, b, epsrel, 1e-4*P_L(k));
+    if(k <= 0)
+        return 0;
+
+    real a[2] = { log(QMIN), -1 };
+    real b[2] = { log(QMAX), +1 };
+    double V = k*k/(98*4*M_PI*M_PI);
+    return V * Integrate<2>(bind(f22_dd, cref(P_L), k, _1, _2), a, b, epsrel, epsrel*P_L(k)/V);
 }
 
 static real f13_dd(const PowerSpectrum& P_L, real k, real q) {
