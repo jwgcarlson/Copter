@@ -20,6 +20,7 @@ public:
     void Save(const char* filename, real kmin = 1e-3, real kmax = 1, int Nk = 1001, bool log = false);
 };
 
+#if 0
 class RedshiftPowerSpectrum {
 public:
     RedshiftPowerSpectrum();
@@ -31,3 +32,4 @@ public:
     };
 
 };
+#endif

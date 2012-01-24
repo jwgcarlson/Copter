@@ -4,12 +4,12 @@
 
 struct Cosmology {
     Cosmology();
-    Cosmology(real h, real Tcmb, real n, real Omega_m, real Omega_b);
-    Cosmology(real h, real Tcmb, real n, real Omega_m, real Omega_b, real sigma8, const array& ki, const array& Ti);
+    Cosmology(real h, real n, real Omega_m, real Omega_b);
+    Cosmology(real h, real n, real Omega_m, real Omega_b, real sigma8, const array& ki, const array& Ti);
     Cosmology(const char* name);
     ~Cosmology();
 
-    void Initialize(real h, real Tcmb, real n, real Omega_m, real Omega_b);
+    void Initialize(real h, real n, real Omega_m, real Omega_b);
     void Initialize(const char* name);
     void SetTransferFunction(const array& ki, const array& Ti);
     void LoadTransferFunction(const char* tkfile, int kcol = 1, int tcol = 2);

@@ -4,6 +4,7 @@
 AC_PREREQ(2.59)
 AC_INIT([Copter], [0.8.7], [jwgcarlson AT berkeley.edu])
 AM_INIT_AUTOMAKE
+AM_MAINTAINER_MODE([disable])
 LT_PREREQ([2.2])
 LT_INIT
 AC_CONFIG_SRCDIR([src/Cosmology.h])
