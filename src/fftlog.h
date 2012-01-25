@@ -1,6 +1,8 @@
 #ifndef FFTLOG_H
 #define FFTLOG_H
 
+#if HAVE_LIBFFTW3
+
 /* Compute the correlation function xi(r) from a power spectrum P(k), sampled
  * at logarithmically spaced points k[n]. */
 void pk2xi(int N, const double k[], const double pk[], double r[], double xi[]);
@@ -11,7 +13,7 @@ void pk2xi(int N, const double k[], const double pk[], double r[], double xi[]);
  * in this notation.  The input k-values must be logarithmically spaced.  The
  * resulting xi_l^m(r) will be evaluated at the dual r-values
  *   r[0] = 1/k[N-1], ..., r[N-1] = 1/k[0]. */
-void ComputeXiLM(int l, int m, int N, const double k[], const double pk[], double r[], double xi[]);
+void fftlog_ComputeXiLM(int l, int m, int N, const double k[], const double pk[], double r[], double xi[]);
 
 #include <complex>
 typedef std::complex<double> dcomplex;
@@ -31,5 +33,7 @@ void fht(int N, const double r[], const dcomplex a[], double k[], dcomplex b[], 
  * reason) to be N times the logarithmic spacing of the input array, i.e.
  *   L = N * log(r[N-1]/r[0])/(N-1) */
 void compute_u_coefficients(int N, double mu, double q, double L, double kcrc, dcomplex u[]);
+
+#endif // HAVE_LIBFFTW3
 
 #endif // FFTLOG_H

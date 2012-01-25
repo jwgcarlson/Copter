@@ -92,8 +92,8 @@ am_libcopter_la_OBJECTS = libcopter_la-Closure.lo \
 	libcopter_la-SPT.lo libcopter_la-SimpleRG.lo \
 	libcopter_la-SpecialFunctions.lo libcopter_la-Spline.lo \
 	libcopter_la-Timer.lo libcopter_la-array.lo \
-	libcopter_la-cfg.lo libcopter_la-fftlog.lo \
-	libcopter_la-pstring.lo libcopter_la-rng.lo
+	libcopter_la-cfg.lo libcopter_la-pstring.lo \
+	libcopter_la-rng.lo
 libcopter_la_OBJECTS = $(am_libcopter_la_OBJECTS)
 libcopter_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(libcopter_la_CXXFLAGS) \
@@ -280,7 +280,7 @@ libcopter_la_SOURCES = \
     LinearPS.cpp MonteCarlo.cpp NoWigglePS.cpp PowerSpectrum.cpp \
     Quadrature.cpp RPT.cpp SPT.cpp SimpleRG.cpp SpecialFunctions.cpp \
     Spline.cpp Timer.cpp \
-    array.cpp cfg.c fftlog.cpp pstring.cpp rng.c
+    array.cpp cfg.c pstring.cpp rng.c
 
 copterincdir = $(includedir)/Copter
 copterinc_HEADERS = \
@@ -291,7 +291,7 @@ copterinc_HEADERS = \
     LinearPS.h MonteCarlo.h NoWigglePS.h ODE.h ODE.inl PowerSpectrum.h \
     Quadrature.h Quadrature.inl RPT.h SPT.h SimpleRG.h SpecialFunctions.h \
     Spline.h Timer.h \
-    array.h cfg.h fftlog.h pstring.h rng.h
+    array.h cfg.h pstring.h rng.h
 
 all: all-am
 
@@ -393,7 +393,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcopter_la-Timer.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcopter_la-array.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcopter_la-cfg.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcopter_la-fftlog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcopter_la-pstring.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcopter_la-rng.Plo@am__quote@
 
@@ -627,13 +626,6 @@ libcopter_la-array.lo: array.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='array.cpp' object='libcopter_la-array.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcopter_la_CPPFLAGS) $(CPPFLAGS) $(libcopter_la_CXXFLAGS) $(CXXFLAGS) -c -o libcopter_la-array.lo `test -f 'array.cpp' || echo '$(srcdir)/'`array.cpp
-
-libcopter_la-fftlog.lo: fftlog.cpp
-@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcopter_la_CPPFLAGS) $(CPPFLAGS) $(libcopter_la_CXXFLAGS) $(CXXFLAGS) -MT libcopter_la-fftlog.lo -MD -MP -MF $(DEPDIR)/libcopter_la-fftlog.Tpo -c -o libcopter_la-fftlog.lo `test -f 'fftlog.cpp' || echo '$(srcdir)/'`fftlog.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libcopter_la-fftlog.Tpo $(DEPDIR)/libcopter_la-fftlog.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='fftlog.cpp' object='libcopter_la-fftlog.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcopter_la_CPPFLAGS) $(CPPFLAGS) $(libcopter_la_CXXFLAGS) $(CXXFLAGS) -c -o libcopter_la-fftlog.lo `test -f 'fftlog.cpp' || echo '$(srcdir)/'`fftlog.cpp
 
 libcopter_la-pstring.lo: pstring.cpp
 @am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcopter_la_CPPFLAGS) $(CPPFLAGS) $(libcopter_la_CXXFLAGS) $(CXXFLAGS) -MT libcopter_la-pstring.lo -MD -MP -MF $(DEPDIR)/libcopter_la-pstring.Tpo -c -o libcopter_la-pstring.lo `test -f 'pstring.cpp' || echo '$(srcdir)/'`pstring.cpp
