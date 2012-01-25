@@ -4,6 +4,14 @@
 #include "Common.h"
 #include "array.h"
 
+/* Compute the quantity
+ *   \xi_l^m(r) = \int_0^\infty \frac{dk}{2\pi^2} k^m j_l(kr) P(k)
+ * using Simpson's rule.  The parameters Nk, kmin, and kmax determine the
+ * accuracy of the integration.  Note that Nk must be even. */
+void ComputeXiLM(int l, int m, const PowerSpectrum& P,
+                 int Nr, const double r[], double xi[],
+                 int Nk = 32768, double kmin = 0., double kmax = 100.);
+
 class CorrelationFunction {
 public:
     CorrelationFunction(const PowerSpectrum& P, real kmin = 1e-4, real kmax = 1e1);

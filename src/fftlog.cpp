@@ -4,6 +4,8 @@
 
 #include <cmath>
 
+#if HAVE_LIBFFTW3
+
 #include <fftw3.h>
 
 #include "fftlog.h"
@@ -128,7 +130,7 @@ void fht(int N, const double r[], const dcomplex a[], double k[], dcomplex b[], 
     delete[] ulocal;
 }
 
-void ComputeXiLM(int l, int m, int N, const double k[], const double pk[], double r[], double xi[]) {
+void fftlog_ComputeXiLM(int l, int m, int N, const double k[], const double pk[], double r[], double xi[]) {
     dcomplex* a = new dcomplex[N];
     dcomplex* b = new dcomplex[N];
 
@@ -143,12 +145,14 @@ void ComputeXiLM(int l, int m, int N, const double k[], const double pk[], doubl
 }
 
 void pk2xi(int N, const double k[], const double pk[], double r[], double xi[]) {
-    ComputeXiLM(0, 2, N, k, pk, r, xi);
+    fftlog_ComputeXiLM(0, 2, N, k, pk, r, xi);
 }
 
 void xi2pk(int N, const double r[], const double xi[], double k[], double pk[]) {
     static const double TwoPiCubed = 8*M_PI*M_PI*M_PI;
-    ComputeXiLM(0, 2, N, r, xi, k, pk);
+    fftlog_ComputeXiLM(0, 2, N, r, xi, k, pk);
     for(int j = 0; j < N; j++)
         pk[j] *= TwoPiCubed;
 }
+
+#endif // HAVE_LIBFFTW3

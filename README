@@ -14,10 +14,12 @@ therein.
 Requirements
 ------------
 Copter is written in C++, so you'll need a relatively modern C++ compiler (e.g.
-g++).  Copter makes use of the GNU Scientific Library (GSL), which you will
-need to have installed somewhere on your system.  It also makes use of parts of
-the Boost C++ library, but the relevant header files are included with Copter
-(in the src/boost directory), so you do not need to install it yourself.
+g++).  Copter makes use of the Boost C++ library headers, so you will need to
+have these installed somewhere on your system.  (Note that Copter only uses
+boost::bind and boost::cref, both of which are defined purely in header files,
+so there is no need to link against boost.  Also, these particular functions
+have now been included in the standardize TR1 library, so the dependence on
+Boost will go away in the future.)
 
 To build the optional Python bindings, you'll need
   1) a recent version of SWIG (usually located at /usr/bin/swig).
@@ -29,10 +31,10 @@ automagically.
 
 Building and Installing
 -----------------------
-Copter should compile on any standard Unix-like machine (including Linux and
-OS X).  It makes use of GNU Autotools, which is the standard build system for
-most open source software today.  For you, the user, installation is as simple
-as entering the three commands
+Copter should compile on any standard Unix-like system (including Linux and OS
+X).  It makes use of GNU Autotools, which is the standard build system for most
+open source software today.  For you, the user, installation is as simple as
+entering the three commands
   $ ./configure [OPTION]... [VAR=VALUE]...
   $ make
   $ make install
@@ -55,4 +57,6 @@ they will be installed to 'PREFIX/lib/pythonM.N/site-packages'.
 For example, to install Copter to your home directory (~/lib, ~/include, etc.)
 using the Intel compiler, you would run
   $ ./configure --prefix=$HOME --enable-openmp CXX=icpc
-  $ make && make install
+  $ make
+  $ make install
+

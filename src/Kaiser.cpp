@@ -2,11 +2,22 @@
 # include <config.h>
 #endif
 
-#include "Cosmology.h"
 #include "Kaiser.h"
-#include "PowerSpectrum.h"
+
+#include "CorrelationFunction.h"
+#include "Cosmology.h"
+#include "GrowthFunction.h"
+#include "LinearPS.h"
 #include "Spline.h"
-#include "fftlog.h"
+
+
+
+Kaiser::Kaiser(const Cosmology& C, real z)
+    : P(LinearPS(C,z))
+{
+    GrowthFunction D(C);
+    f = D.f(z);
+}
 
 
 Kaiser::Kaiser(const PowerSpectrum& P_, real f_)
@@ -14,10 +25,47 @@ Kaiser::Kaiser(const PowerSpectrum& P_, real f_)
 {
 }
 
-real Kaiser::P_s(real k, real mu) {
+real Kaiser::P_s(real k, real mu) const {
     return pow2(1 + f*mu*mu) * P(k);
 }
 
+real Kaiser::PMultipole(int ell, real k) const {
+    real prefactor;
+    if(ell == 0)
+        prefactor = 1. + (2./3.)*f + (1./5.)*f*f;
+    else if(ell == 2)
+        prefactor = (4./3.)*f + (4./7.)*f*f;
+    else if(ell == 4)
+        prefactor = (8./35.)*f*f;
+    else
+        prefactor = 0.;
+
+    return prefactor * P(k);
+}
+
+array Kaiser::PMultipole(int ell, const array& k) const {
+    int N = (int) k.size();
+    array pell(N);
+    #pragma omp parallel for
+    for(int j = 0; j < N; j++)
+        pell[j] = PMultipole(ell, k[j]);
+    return pell;
+}
+
+real Kaiser::XiMultipole(int ell, real r, int Nk, real kmin, real kmax) const {
+    double xi;
+    ComputeXiLM(ell, 2, P, 1, &r, &xi, Nk, kmin, kmax);
+    return xi;
+}
+
+array Kaiser::XiMultipole(int ell, const array& r, int Nk, real kmin, real kmax) const {
+    int Nr = (int) r.size();
+    array xi(Nr);
+    ComputeXiLM(ell, 2, P, Nr, &r[0], &xi[0], Nk, kmin, kmax);
+    return xi;
+}
+
+#if 0
 Spline Kaiser::ComputeP_ell(int ell, real kmin, real kmax, int Nk) {
     real prefactor;
     if(ell == 0)
@@ -68,3 +116,4 @@ void Kaiser::ComputeXi_ell(int ell, real f, const array& k, const array& pk, arr
     xi.resize(N);
     ComputeXiLM(ell, 2, N, k, pks, r, xi);
 }
+#endif
