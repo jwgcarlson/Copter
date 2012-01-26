@@ -4,6 +4,7 @@
 
 #include <cctype>
 #include <cerrno>
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -316,7 +317,7 @@ pstring::operator bool() const {
     else if(small == "false")
         return false;
     else {
-        fprintf(stderr, "pstring::tobool: invalid boolean string: %s\n", small.c_str());
+        fprintf(stderr, "pstring: invalid boolean string: %s\n", small.c_str());
         return false;
     }
 }
@@ -325,15 +326,15 @@ pstring::operator long() const {
     errno = 0;
     long l = strtol(this->c_str(), NULL, 10);
     if(errno != 0)
-        fprintf(stderr, "pstring::tolong: error converting %s:\n  %s\n", this->c_str(), strerror(errno));
+        fprintf(stderr, "pstring: error converting %s to long:\n  %s\n", this->c_str(), strerror(errno));
     return l;
 }
 
 pstring::operator double() const {
     errno = 0;
     double d = strtod(this->c_str(), NULL);
-    if(errno != 0)
-        fprintf(stderr, "pstring::todouble: error converting %s:\n  %s\n", this->c_str(), strerror(errno));
+    if(errno != 0 && fabs(d) > 1)       // ignore underflow
+        fprintf(stderr, "pstring: error converting %s to double:\n  %s\n", this->c_str(), strerror(errno));
     return d;
 }
 
