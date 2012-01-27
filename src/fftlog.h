@@ -4,8 +4,12 @@
 #if HAVE_LIBFFTW3
 
 /* Compute the correlation function xi(r) from a power spectrum P(k), sampled
- * at logarithmically spaced points k[n]. */
+ * at logarithmically spaced points k[j]. */
 void pk2xi(int N, const double k[], const double pk[], double r[], double xi[]);
+
+/* Compute the power spectrum P(k) from a correlation function xi(r), sampled
+ * at logarithmically spaced points r[i]. */
+void xi2pk(int N, const double r[], const double xi[], double k[], double pk[]);
 
 /* Compute the function
  *   \xi_l^m(r) = \int_0^\infty \frac{dk}{2\pi^2} k^m j_l(kr) P(k)
