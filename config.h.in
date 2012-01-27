@@ -3,6 +3,15 @@
 /* Enable debugging output */
 #undef DEBUG
 
+/* Defined if the requested minimum BOOST version is satisfied */
+#undef HAVE_BOOST
+
+/* Define to 1 if you have <boost/bind.hpp> */
+#undef HAVE_BOOST_BIND_HPP
+
+/* Define to 1 if you have <boost/ref.hpp> */
+#undef HAVE_BOOST_REF_HPP
+
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 

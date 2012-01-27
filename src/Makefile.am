@@ -1,7 +1,7 @@
 EXTRA_DIST = 
 
 lib_LTLIBRARIES = libcopter.la
-libcopter_la_CPPFLAGS = -DDATADIR='"$(datadir)/Copter"'
+libcopter_la_CPPFLAGS = -DDATADIR='"$(datadir)/Copter"' $(BOOST_CPPFLAGS)
 libcopter_la_CXXFLAGS = $(OPENMP_CFLAGS)
 libcopter_la_LDFLAGS = $(OPENMP_CFLAGS)
 libcopter_la_SOURCES = \

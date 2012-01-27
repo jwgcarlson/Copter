@@ -92,13 +92,10 @@ AC_CHECK_LIB(fftw3, fftw_execute)
 # Check for OpenMP support.
 AC_OPENMP
 
-# Check for boost.
-#acx_have_boost=no
-#AX_BOOST_BASE([], [acx_have_boost=yes], [])
-#if test x"$acx_have_boost" != xyes; then
-#    AC_MSG_ERROR([could not find boost])
-#fi
-#AM_CONDITIONAL([HAVE_AM_BOOST], [test $acx_have_boost = yes])
+# Check for Boost headers.
+BOOST_REQUIRE
+BOOST_BIND
+BOOST_REF
 
 # Decide whether to build Python bindings.
 AC_ARG_ENABLE(
@@ -176,6 +173,7 @@ CXXFLAGS = $CXXFLAGS
 LDFLAGS = $LDFLAGS
 LIBS = $LIBS
 OPENMP_CFLAGS = $OPENMP_CFLAGS
+BOOST_CPPFLAGS = $BOOST_CPPFLAGS
 SWIG = $SWIG
 PYTHON_CPPFLAGS = $PYTHON_CPPFLAGS
 PYTHON_LDFLAGS = $PYTHON_LDFLAGS
