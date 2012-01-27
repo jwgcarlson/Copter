@@ -19,6 +19,8 @@
 /* Preconditions: N >= 2, X[0] <= x <= X[N-1], X[i] < X[i+1] for 0 <= i <= N-2
  * Postcondition: 0 <= i <= N-2 */
 static int BinaryLookup(real x, int N, const real* X) {
+    if(!(N >= 2 && X[0] <= x && x <= X[N-1]))
+        fprintf(stderr, "x = %g, N = %d, X[0] = %g, X[N-1] = %g\n", x, N, X[0], X[N-1]);
     assert(N >= 2 && X[0] <= x && x <= X[N-1]);
 
     /* Avoid potentially pathological case */
