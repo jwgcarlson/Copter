@@ -1,0 +1,13 @@
+.deps
+.libs
+*.swp
+*.lo
+*.o
+/autom4te.cache
+/stamp-h1
+/Makefile
+/libtool
+/config.h
+/config.h.in~
+/config.log
+/config.status

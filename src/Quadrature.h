@@ -5,8 +5,9 @@
 
 /* General notes on integration routines:
  *  - The Function f can be any callable object, i.e. any object that defines
- *    the method  double operator()(double x).  Of course this includes standard
- *    C-style functions of signature  double f(double x).
+ *    the method  double operator()(double x).  This becomes especially
+ *    powerful when combined with the Boost/TR1 bind() method.  Of course you
+ *    can also use regular C-style functions of signature  double f(double x).
  *  - epsrel is the desired relative error, epsabs is the desired absolute
  *    error.  The adaptive integration routines continue until _either_
  *      relative error < epsrel or absolute error < epsabs.
