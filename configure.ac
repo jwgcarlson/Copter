@@ -148,6 +148,7 @@ fi
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile
                  data/Makefile
+                 doc/Doxyfile
                  doc/Makefile
                  examples/Makefile
                  python/Makefile
