@@ -80,10 +80,14 @@ AC_FUNC_STRTOD
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS([memset strerror strtol pow sqrt])
 
-# Check for GSL.
-#AX_PATH_GSL(1.10)
-#CPPFLAGS="$CPPFLAGS $GSL_CFLAGS"
-#LIBS="$LIBS $GSL_LIBS"
+# Check for Doxygen.
+AC_CHECK_PROGS([DOXYGEN], [doxygen])
+if test -z "$DOXYGEN"; then
+    AC_MSG_WARN([Doxygen not found - documentation will not be built])
+fi
+AM_CONDITIONAL([HAVE_DOXYGEN], [test -n "$DOXYGEN"])
+AM_COND_IF([HAVE_DOXYGEN], [AC_CONFIG_FILES([doc/Doxyfile])])
+
 
 # Check for FFTW 3.
 AC_CHECK_HEADER([fftw3.h])
@@ -132,23 +136,10 @@ if test "$enable_python" = yes; then
     AC_SUBST([_PYCOPTER_LA], [_pycopter.la])
 fi
 
-# Get the default number of threads to use for parallelized code.
-#AC_ARG_WITH(
-#    [numthreads],
-#    [AS_HELP_STRING([--with-numthreads=N],
-#                    [number of threads to use for parallelized code])],
-#    [OMP_NUM_THREADS="$with_numthreads"]
-#)
-#AC_SUBST(OMP_NUM_THREADS)
-
-# Bypass unnecessary invocations of autoheader.  (Beware of hack!)
-#AUTOHEADER="echo autoheader ignored"
-
 # Write Makefiles and configuration header.
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile
                  data/Makefile
-                 doc/Doxyfile
                  doc/Makefile
                  examples/Makefile
                  python/Makefile
@@ -176,6 +167,7 @@ LIBS = $LIBS
 OPENMP_CFLAGS = $OPENMP_CFLAGS
 BOOST_CPPFLAGS = $BOOST_CPPFLAGS
 SWIG = $SWIG
+DOXYGEN = $DOXYGEN
 PYTHON_CPPFLAGS = $PYTHON_CPPFLAGS
 PYTHON_LDFLAGS = $PYTHON_LDFLAGS
 -------------------------------------------------------------------------------
