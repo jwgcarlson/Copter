@@ -18266,7 +18266,7 @@ fi
 # Write Makefiles and configuration header.
 ac_config_headers="$ac_config_headers config.h"
 
-ac_config_files="$ac_config_files Makefile data/Makefile doc/Makefile examples/Makefile python/Makefile src/Makefile tests/Makefile"
+ac_config_files="$ac_config_files Makefile data/Makefile doc/Doxyfile doc/Makefile examples/Makefile python/Makefile src/Makefile tests/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -19379,6 +19379,7 @@ do
     "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
+    "doc/Doxyfile") CONFIG_FILES="$CONFIG_FILES doc/Doxyfile" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "examples/Makefile") CONFIG_FILES="$CONFIG_FILES examples/Makefile" ;;
     "python/Makefile") CONFIG_FILES="$CONFIG_FILES python/Makefile" ;;
