@@ -7,14 +7,11 @@
 
 #include <cmath>
 
-/* Type definitions */
+/** \todo Remove \c real typedef, just use double throughout. */
 typedef double real;
-typedef unsigned char uchar;
-typedef unsigned short ushort;
-typedef unsigned int uint;
-typedef unsigned long ulong;
 
 /* Forward declarations of generic classes */
+class Closure;
 class CorrelationFunction;
 class Cosmology;
 class Datafile;
@@ -24,7 +21,7 @@ class Timer;
 class array;
 class pstring;
 
-/* Convenient print functions (that flush the buffer afterwards) */
+/* Convenient print functions that flush the output buffer afterwards */
 //   Print to stdout
 void info(const char* format, ...);
 //   Print to stdout if VERBOSE is defined.

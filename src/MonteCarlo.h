@@ -12,11 +12,11 @@
 #define DEFAULT_NINCREASE 1000
 
 
-/* MonteCarloIntegral
+/**
+ * \brief n-dimensional quasi-Monte Carlo integration.
  *
- * n-dimensional Monte-Carlo integration, based on the implementation of the
- * VEGAS importance-sampling algorithm found in the Cuba library.  Uses GSL for
- * quasi-random number generation. */
+ * Based on the implementation of the VEGAS importance-sampling algorithm found
+ * in the Cuba library.  Uses Sobol sequences for quasi-random numbers. */
 
 class MonteCarloIntegral {
 public:

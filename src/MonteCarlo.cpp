@@ -8,30 +8,9 @@
 #include <cstdlib>
 #include <cstring>
 
-//#include <gsl/gsl_qrng.h>
-
 #include "Common.h"
 #include "MonteCarlo.h"
 #include "rng.h"
-
-
-#if 0
-struct QuasiRNG {
-    gsl_qrng* q;
-
-    QuasiRNG(int n) {
-        q = gsl_qrng_alloc(gsl_qrng_sobol, n);
-    }
-
-    ~QuasiRNG() {
-        gsl_qrng_free(q);
-    }
-
-    void Sample(double* x) {
-        gsl_qrng_get(q, x);
-    }
-};
-#endif
 
 
 /******************************************************************************
@@ -88,7 +67,6 @@ void MonteCarloIntegral::Integrate(double* I, double* param, double* errorout, i
             state.grid[i][bin] = (bin + 1)/(double)NBINS;
 
     /* Initialize quasi-random number generator */
-//    QuasiRNG qrng(n);
     Sobol qrng;
     rng_sobol_init(&qrng, n);
 
@@ -116,7 +94,6 @@ void MonteCarloIntegral::Integrate(double* I, double* param, double* errorout, i
             /* Prepare positions and weights for sampling */
             while(x < f) {
                 double weight = base_weight;
-//                qrng.Sample(x);
                 rng_sobol_get(&qrng, x);
                 for(int i = 0; i < n; i++) {
                     double pos = (*x)*NBINS;
@@ -191,18 +168,6 @@ void MonteCarloIntegral::Integrate(double* I, double* param, double* errorout, i
 
             c->sum = c->sqsum = 0;
         }
-
-//#ifdef VERBOSE
-//        {
-//            char s[128 + 128*m], *p = s;
-//            p += sprintf(p, "Iteration %d: %d integrand evaluations\n", state.niter+1, neval);
-//            for(int j = 0; j < m; j++) {
-//                Cumulants *c = &state.cumul[j];
-//                p += sprintf(p, "  I_%d =  %g +/- %g  \tchisq %g (%d df)\n", j, jacobian*c->avg, jacobian*c->err, c->chisq, state.niter);
-//            }
-//            verbose("%s\n", s);
-//        }
-//#endif
 
         /* Finish if we're below error thresholds */
         if(notdone == 0)
@@ -305,7 +270,6 @@ void MonteCarloIntegral::RefineGrid(Grid& grid, Grid& margsum) {
         newgrid[newbin] = newcur = fmax(newcur, cur - 2*delta/(imp[bin] + imp[bin == 0 ? 0 : bin-1]));
     }
 
-//    memcpy(grid, newgrid, (NBINS-1)*sizeof(double));
     for(bin = 0; bin < NBINS-1; bin++)
         grid[bin] = newgrid[bin];
     grid[NBINS-1] = 1;

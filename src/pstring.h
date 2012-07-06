@@ -47,8 +47,8 @@ public:
     pstring slice(int i, int j) const;
 
     /* Return the first or last 'n' characters of the string */
-    pstring head(uint n = 1) const;
-    pstring tail(uint n = 1) const;
+    pstring head(unsigned n = 1) const;
+    pstring tail(unsigned n = 1) const;
 
     /* Strip whitespace from the ends of the string */
     pstring rstrip() const;
@@ -84,7 +84,7 @@ public:
     int count(const std::string& s) const;
 
     /* Read up until the first newline character, starting from position 'm' */
-    pstring firstline(uint m = 0) const;
+    pstring firstline(unsigned m = 0) const;
 
     /* Split the string into whitespace-separated components */
     std::vector<pstring> split() const;

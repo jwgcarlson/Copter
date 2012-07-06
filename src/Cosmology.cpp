@@ -26,10 +26,10 @@ Cosmology::Cosmology(real h, real n, real Omega_m, real Omega_b, real sigma8, co
     NormalizeTransferFunction(sigma8);
 }
 
-Cosmology::Cosmology(const char* cosmo) {
+Cosmology::Cosmology(const char* name) {
     sigma8 = 0;
     delta_H = 1;
-    Initialize(cosmo);
+    Initialize(name);
 }
 
 void Cosmology::Initialize(real h_, real n_, real Omega_m_, real Omega_b_) {
@@ -44,8 +44,8 @@ void Cosmology::Initialize(real h_, real n_, real Omega_m_, real Omega_b_) {
     CalculateAdditionalParameters();
 }
 
-void Cosmology::Initialize(const char* cosmo) {
-    pstring path(cosmo);
+void Cosmology::Initialize(const char* name) {
+    pstring path(name);
 
     /* First check the current directory for a file named cosmo */
     bool found = (access(path.c_str(), R_OK) == 0);
@@ -63,8 +63,8 @@ void Cosmology::Initialize(const char* cosmo) {
     }
 
     if(!found) {
-        warning("Cosmology: could not find cosmology '%s'\n", cosmo);
-        warning("  tried ./%s, ./%s.ini, and %s/%s.ini\n", cosmo, cosmo, DATADIR, cosmo);
+        warning("Cosmology: could not find cosmology '%s'\n", name);
+        warning("  tried ./%s, ./%s.ini, and %s/%s.ini\n", name, name, DATADIR, name);
         return;
     }
 
@@ -148,7 +148,6 @@ void Cosmology::CalculateAdditionalParameters() {
      * They will probably never be used. */
 
     using namespace Constants;
-    Tcmb = 2.725;
     H0 = 100*h * km/second/Mpc;
     rho_crit = (3*H0*H0)/(8*M_PI*G);
     Omega_gamma = (M_PI*M_PI/15) * pow4(k*Tcmb)/(pow3(hbar)*pow5(c)) / rho_crit;

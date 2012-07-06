@@ -1,12 +1,15 @@
-/* HigherSPT
- *
- * The SPT power spectrum to 2 loops and beyond. */
-
 #ifndef HIGHER_SPT_H
 #define HIGHER_SPT_H
 
 #include "Common.h"
 #include "MonteCarlo.h"
+
+/**
+ * \brief The SPT power spectrum to 2 loops.
+ *
+ * Uses quasi-Monte Carlo methods to compute higher-dimensional mode-coupling
+ * integrals.  Currently only implemented up to 2 loops (i.e. 3rd order in the
+ * linear power spectrum). */
 
 class HigherSPT {
 public:

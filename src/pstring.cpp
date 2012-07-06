@@ -110,11 +110,11 @@ pstring pstring::slice(int i, int j) const {
     return pstring(*this, i, j - i);
 }
 
-pstring pstring::head(uint n) const {
+pstring pstring::head(unsigned n) const {
     return pstring(*this, 0, n);
 }
 
-pstring pstring::tail(uint n) const {
+pstring pstring::tail(unsigned n) const {
     size_type len = this->length();
     if(n >= len)
         return *this;
@@ -178,20 +178,20 @@ void pstring::stripquotes(bool) {
 pstring pstring::capitalize() const {
     pstring s = *this;
     if(!s.empty())
-        s[(uint)0] = toupper(s[(uint)0]);
+        s[(unsigned)0] = toupper(s[(unsigned)0]);
     return s;
 }
 
 pstring pstring::lower() const {
     pstring s = *this;
-    for(uint i = 0; i < s.length(); i++)
+    for(unsigned i = 0; i < s.length(); i++)
         s[i] = tolower(s[i]);
     return s;
 }
 
 pstring pstring::upper() const {
     pstring s = *this;
-    for(uint i = 0; i < s.length(); i++)
+    for(unsigned i = 0; i < s.length(); i++)
         s[i] = toupper(s[i]);
     return s;
 }
@@ -255,7 +255,7 @@ int pstring::count(const string& s) const {
     return num;
 }
 
-pstring pstring::firstline(uint m) const {
+pstring pstring::firstline(unsigned m) const {
     if(m > this->length())
         return "";
     else
